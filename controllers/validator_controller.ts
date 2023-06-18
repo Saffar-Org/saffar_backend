@@ -3,6 +3,19 @@ class Validator {
   private static emailRegex: RegExp =
     /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
 
+  /// Checks if name length is between 1 and 1000
+  static validateName(name: string) {
+    if (!name) {
+      return false;
+    }
+
+    if (name.length < 0 || name.length > 1000) {
+      return false;
+    }
+
+    return true;
+  }
+
   /// Validates Email address
   static validateEmail(email: string) {
     // Checks if email is present or not
@@ -41,10 +54,10 @@ class Validator {
     return true;
   }
 
-  // Validates is password is more then or equal to 8 characters or not
+  /// Validates is password length is between 8 and 1000
   static validatePassword(password: string) {
     if (!password) {
-        return false;
+      return false;
     }
 
     return password.length >= 8;
@@ -52,4 +65,3 @@ class Validator {
 }
 
 export = Validator;
-

@@ -1,5 +1,7 @@
 import * as bcrypt from "bcrypt";
+import * as jwt from "jsonwebtoken";
 import * as uuid from "uuid";
+import Constant from "../constants/constants";
 import User from "../models/User";
 import Validator from "./validator_controller";
 
@@ -21,6 +23,14 @@ const signUp = async (req: any, res: any, next?: Function) => {
       });
     }
 
+    // Checking if name is valid
+    if (!Validator.validateName(name)) {
+      return res.status(400).json({
+        error_code: "INVALID_NAME",
+        message: "Invalid name. Name can not be empty.",
+      });
+    }
+
     // Checking if email is valid
     if (!Validator.validateEmail(email)) {
       return res.status(400).json({
@@ -38,8 +48,20 @@ const signUp = async (req: any, res: any, next?: Function) => {
       });
     }
 
+    // Find if there is already a user with this email
+    const oldUser = await User.findOne({ email: email });
+
+    // Returning email already present error if user with same email
+    // already present
+    if (oldUser) {
+      return res.status(409).json({
+        error_code: "EMAIL_ALREADY_PRESENT",
+        message: "An user with this email is already present.",
+      });
+    }
+
     // Hashing password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, Constant.saltRounds);
 
     // Creating a user in MongoDB
     const user = await User.create({
@@ -49,6 +71,16 @@ const signUp = async (req: any, res: any, next?: Function) => {
       password: hashedPassword,
     });
 
+    // Creating a token. Store this token and provide this token 
+    // when ever you want to get data for which authentication is required
+    const token: string = jwt.sign(
+      { id: id, email: email },
+      process.env.TOKEN_KEY!,
+      {
+        expiresIn: "1d",
+      }
+    );
+
     // Returning 200 response and user data after user is created in DB
     res.status(200).json({
       message: "Created user successfully",
@@ -56,6 +88,7 @@ const signUp = async (req: any, res: any, next?: Function) => {
         id: id,
         name: name,
         email: email,
+        token: token,
       },
     });
 
@@ -63,14 +96,13 @@ const signUp = async (req: any, res: any, next?: Function) => {
       next();
     }
   } catch (error) {
-    console.log(`SERVER ERROR: ${error}`);
+    console.log(`SERVER_ERROR: ${error}`);
 
-    res
-      .status(500)
-      .json({
-        error: "SERVER_ERROR",
-        message: "There was some problem in the server.",
-      });
+    // Returning server error
+    res.status(500).json({
+      error_code: "SERVER_ERROR",
+      message: "There was some problem in the server.",
+    });
   }
 };
 
