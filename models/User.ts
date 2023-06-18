@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Validator from "../controllers/validator_controller";
+import Validator from "../utils/validator";
 
 const userSchema = new mongoose.Schema({
   id: {

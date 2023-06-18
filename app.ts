@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
+import signInRouter from "./routes/sign_in_router";
 import signUpRouter from "./routes/sign_up_router";
 
 // Configuration for using .env file
@@ -24,6 +25,9 @@ if (process.env.MONGODB_CONNECTION_URL != undefined) {
 
 // Sign UP API Routes
 app.use("/api/sign_up", signUpRouter);
+
+// Sign In API Routes
+app.use("/api/sign_in", signInRouter);
 
 // Listening to PORT
 app.listen(PORT, () => console.log(`Server is running in PORT ${PORT}`));

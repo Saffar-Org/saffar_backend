@@ -1,14 +1,15 @@
 import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
 import * as uuid from "uuid";
-import Constant from "../constants/constants";
+import Constant from "../constants/constant";
+import Err from "../constants/error";
 import User from "../models/User";
-import Validator from "./validator_controller";
+import Validator from "../utils/validator";
 
 const signUp = async (req: any, res: any, next?: Function) => {
   try {
     // Generating a random id
-    let id: string = uuid.v4();
+    const id: string = uuid.v4();
     const name: string = req.body.name;
     const email: string = req.body.email;
     const password: string = req.body.password;
@@ -18,33 +19,32 @@ const signUp = async (req: any, res: any, next?: Function) => {
     // is returned.
     if (!name || !email || !password) {
       return res.status(400).json({
-        error_code: "EMPTY_PARAM",
-        message: "Name, Email and Password must not be empty.",
+        error_code: Err.code.EMPTY_PARAM,
+        message: Err.message.EMPTY_PARAM,
       });
     }
 
     // Checking if name is valid
     if (!Validator.validateName(name)) {
       return res.status(400).json({
-        error_code: "INVALID_NAME",
-        message: "Invalid name. Name can not be empty.",
+        error_code: Err.code.INVALID_NAME,
+        message: Err.message.INVALID_NAME,
       });
     }
 
     // Checking if email is valid
     if (!Validator.validateEmail(email)) {
       return res.status(400).json({
-        error_code: "INVALID_EMAIL",
-        message: "Invalid email.",
+        error_code: Err.code.INVALID_EMAIL,
+        message: Err.message.INVALID_EMAIL,
       });
     }
 
     // Checking if password is valid
     if (!Validator.validatePassword(password)) {
       return res.status(400).json({
-        error_code: "INVALID_PASSWORD",
-        message:
-          "Invalid password. Password must be at least 8 characters long.",
+        error_code: Err.code.INVALID_PASSWORD,
+        message: Err.message.INVALID_PASSWORD,
       });
     }
 
@@ -55,8 +55,8 @@ const signUp = async (req: any, res: any, next?: Function) => {
     // already present
     if (oldUser) {
       return res.status(409).json({
-        error_code: "EMAIL_ALREADY_PRESENT",
-        message: "An user with this email is already present.",
+        error_code: Err.code.EMAIL_ALREADY_EXISTS,
+        message: Err.message.EMAIL_ALREADY_EXISTS,
       });
     }
 
@@ -71,7 +71,7 @@ const signUp = async (req: any, res: any, next?: Function) => {
       password: hashedPassword,
     });
 
-    // Creating a token. Store this token and provide this token 
+    // Creating a token. Store this token and provide this token
     // when ever you want to get data for which authentication is required
     const token: string = jwt.sign(
       { id: id, email: email },
@@ -83,7 +83,7 @@ const signUp = async (req: any, res: any, next?: Function) => {
 
     // Returning 200 response and user data after user is created in DB
     res.status(200).json({
-      message: "Created user successfully",
+      message: "Signed up and created user successfully",
       user: {
         id: id,
         name: name,
@@ -96,12 +96,12 @@ const signUp = async (req: any, res: any, next?: Function) => {
       next();
     }
   } catch (error) {
-    console.log(`SERVER_ERROR: ${error}`);
+    console.log(`Error in sign up: ${error}`);
 
     // Returning server error
     res.status(500).json({
-      error_code: "SERVER_ERROR",
-      message: "There was some problem in the server.",
+      error_code: Err.code.SERVER_ERROR,
+      message: Err.message.SERVER_ERROR,
     });
   }
 };
