@@ -10,7 +10,7 @@ const signIn = async (req: any, res: any, next?: Function) => {
     const password: string = req.body.password;
 
     // Checks if phone and password is present
-    if (!phone || !password) {
+    if (phone === undefined || password === undefined) {
       // If phone and password not present then return a 400 response
       return res.status(400).json({
         error_code: Err.code.EMPTY_PARAM,

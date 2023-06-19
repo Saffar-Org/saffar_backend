@@ -15,7 +15,7 @@ const signUp = async (req: any, res: any, next?: Function) => {
     // If name, phone or password does not exist
     // then 400 response and error message and code
     // is returned.
-    if (!name || !phone || !password) {
+    if (name === undefined || phone === undefined || password === undefined) {
       return res.status(400).json({
         error_code: Err.code.EMPTY_PARAM,
         message: Err.message.EMPTY_PARAM,
