@@ -54,6 +54,24 @@ class Validator {
     return true;
   }
 
+  static validatePhone(phone: string) {
+    if (!phone) {
+      return false;
+    }
+
+    if (phone.length != 10) {
+      return false;
+    }
+
+    try {
+      parseInt(phone);
+
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
   /// Validates is password length is between 8 and 1000
   static validatePassword(password: string) {
     if (!password) {

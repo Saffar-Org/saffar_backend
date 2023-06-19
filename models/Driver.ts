@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
+import * as mongoose from "mongoose";
 import Validator from "../utils/validator";
 
-const userSchema = new mongoose.Schema({
+const driverSchema = new mongoose.Schema({
   _id: {
     type: String,
     required: true,
@@ -53,10 +53,26 @@ const userSchema = new mongoose.Schema({
       message: (props: any) => `Password must be atleast 8 characters long.`,
     },
   },
+  vehicle_name: {
+    type: String,
+    required: true,
+    minLength: 1,
+    maxLength: 1000,
+  },
+  vehicle_number: {
+    type: String,
+    required: true,
+    minLength: 1,
+    maxLength: 1000,
+  },
   image_url: {
     type: String,
     minLength: 1,
     maxLength: 1000,
+  },
+  active: {
+    type: Boolean,
+    default: true,
   },
   latitude: {
     type: Number,
@@ -83,7 +99,3 @@ const userSchema = new mongoose.Schema({
     default: [],
   },
 });
-
-const user = mongoose.model("User", userSchema, "users");
-
-export = user;

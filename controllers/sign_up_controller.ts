@@ -64,7 +64,8 @@ const signUp = async (req: any, res: any, next?: Function) => {
     const hashedPassword = await bcrypt.hash(password, Constant.saltRounds);
 
     // Creating a user in MongoDB
-    const user = await User.create({
+    await User.create({
+      _id: id,
       id: id,
       name: name,
       email: email,
