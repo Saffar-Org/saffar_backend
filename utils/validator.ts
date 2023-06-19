@@ -82,7 +82,7 @@ class Validator {
       return false;
     }
 
-    const numberPlateRegex = /^[A-Z]{2}[0-9]{2}[A-HJ-NP-Z]{1,2}[0-9]{4}$/;
+    const numberPlateRegex: RegExp = /^[A-Z]{2}[0-9]{2}[A-HJ-NP-Z]{1,2}[0-9]{4}$/;
     return numberPlateRegex.test(vehicleNumber);
   }
 }
