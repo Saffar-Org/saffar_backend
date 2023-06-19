@@ -11,13 +11,13 @@ const signUp = async (req: any, res: any, next?: Function) => {
     // Generating a random id
     const id: string = uuid.v4();
     const name: string = req.body.name;
-    const email: string = req.body.email;
+    const phone: string = req.body.phone;
     const password: string = req.body.password;
 
-    // If name, email or password does not exist
+    // If name, phone or password does not exist
     // then 400 response and error message and code
     // is returned.
-    if (!name || !email || !password) {
+    if (!name || !phone || !password) {
       return res.status(400).json({
         error_code: Err.code.EMPTY_PARAM,
         message: Err.message.EMPTY_PARAM,
@@ -32,11 +32,11 @@ const signUp = async (req: any, res: any, next?: Function) => {
       });
     }
 
-    // Checking if email is valid
-    if (!Validator.validateEmail(email)) {
+    // Checking if phone is valid
+    if (!Validator.validatePhone(phone)) {
       return res.status(400).json({
-        error_code: Err.code.INVALID_EMAIL,
-        message: Err.message.INVALID_EMAIL,
+        error_code: Err.code.INVALID_PHONE,
+        message: Err.message.INVALID_PHONE,
       });
     }
 
@@ -48,15 +48,15 @@ const signUp = async (req: any, res: any, next?: Function) => {
       });
     }
 
-    // Find if there is already a user with this email
-    const oldUser = await User.findOne({ email: email });
+    // Find if there is already a user with this phone
+    const oldUser = await User.findOne({ email: phone });
 
-    // Returning email already present error if user with same email
+    // Returning phone already present error if user with same phone
     // already present
     if (oldUser) {
       return res.status(409).json({
-        error_code: Err.code.EMAIL_ALREADY_EXISTS,
-        message: Err.message.EMAIL_ALREADY_EXISTS,
+        error_code: Err.code.PHONE_ALREADY_EXISTS,
+        message: Err.message.PHONE_ALREADY_EXISTS,
       });
     }
 
@@ -68,14 +68,14 @@ const signUp = async (req: any, res: any, next?: Function) => {
       _id: id,
       id: id,
       name: name,
-      email: email,
+      email: phone,
       password: hashedPassword,
     });
 
     // Creating a token. Store this token and provide this token
     // when ever you want to get data for which authentication is required
     const token: string = jwt.sign(
-      { id: id, email: email },
+      { id: id, email: phone },
       process.env.TOKEN_KEY!,
       {
         expiresIn: "1d",
@@ -88,7 +88,7 @@ const signUp = async (req: any, res: any, next?: Function) => {
       user: {
         id: id,
         name: name,
-        email: email,
+        email: phone,
         token: token,
       },
     });
