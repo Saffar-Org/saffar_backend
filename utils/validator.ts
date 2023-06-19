@@ -54,6 +54,7 @@ class Validator {
     return true;
   }
 
+  /// Checkinf if phone number length 10 and is numeric
   static validatePhone(phone: string) {
     if (!phone) {
       return false;
@@ -66,13 +67,23 @@ class Validator {
     return !isNaN(Number(phone));
   }
 
-  /// Validates is password length is between 8 and 1000
+  /// Validates if password length is between 8 and 1000
   static validatePassword(password: string) {
     if (!password) {
       return false;
     }
 
     return password.length >= 8;
+  }
+
+  /// Validates vehicle number plate number 
+  static validateVehicleNumber(vehicleNumber: string) {
+    if (!vehicleNumber) {
+      return false;
+    }
+
+    const numberPlateRegex = /^[A-Z]{2}[0-9]{2}[A-HJ-NP-Z]{1,2}[0-9]{4}$/;
+    return numberPlateRegex.test(vehicleNumber);
   }
 }
 

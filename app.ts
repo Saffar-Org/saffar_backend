@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
+import driverSignUp from "./controllers/driver_sign_up_controller";
 import signInRouter from "./routes/sign_in_router";
 import signUpRouter from "./routes/sign_up_router";
 
@@ -25,6 +26,7 @@ if (process.env.MONGODB_CONNECTION_URL != undefined) {
 
 // Sign UP API Routes
 app.use("/api/sign_up", signUpRouter);
+app.use("/api/driver_sign_up", driverSignUp);
 
 // Sign In API Routes
 app.use("/api/sign_in", signInRouter);
