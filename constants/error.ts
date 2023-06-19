@@ -9,6 +9,7 @@ class Err {
     PHONE_ALREADY_EXISTS: "PHONE_ALREADY_EXISTS",
     EMAIL_ALREADY_EXISTS: "EMAIL_ALREADY_EXISTS",
     SERVER_ERROR: "SERVER_ERROR",
+    NO_USER_WITH_PHONE: "NO_USER_WITH_PHONE",
     NO_USER_WITH_EMAIL: "NO_USER_WITH_EMAIL",
     WRONG_PASSWORD: "WRONG_PASSWORD",
   };
@@ -24,6 +25,7 @@ class Err {
     PHONE_ALREADY_EXISTS: "An user with this phone number is already present.",
     EMAIL_ALREADY_EXISTS: "An user with this email is already present.",
     SERVER_ERROR: "There was some problem in the server.",
+    NO_USER_WITH_PHONE: "There is no user with this phone.",
     NO_USER_WITH_EMAIL: "There is no user with this email.",
     WRONG_PASSWORD: "Password is wrong.",
   };

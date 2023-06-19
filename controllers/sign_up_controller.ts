@@ -49,7 +49,7 @@ const signUp = async (req: any, res: any, next?: Function) => {
     }
 
     // Find if there is already a user with this phone
-    const oldUser = await User.findOne({ email: phone });
+    const oldUser = await User.findOne({ phone: phone });
 
     // Returning phone already present error if user with same phone
     // already present
@@ -68,14 +68,14 @@ const signUp = async (req: any, res: any, next?: Function) => {
       _id: id,
       id: id,
       name: name,
-      email: phone,
+      phone: phone,
       password: hashedPassword,
     });
 
     // Creating a token. Store this token and provide this token
     // when ever you want to get data for which authentication is required
     const token: string = jwt.sign(
-      { id: id, email: phone },
+      { id: id, phone: phone },
       process.env.TOKEN_KEY!,
       {
         expiresIn: "1d",
@@ -88,7 +88,7 @@ const signUp = async (req: any, res: any, next?: Function) => {
       user: {
         id: id,
         name: name,
-        email: phone,
+        phone: phone,
         token: token,
       },
     });

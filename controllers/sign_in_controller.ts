@@ -6,24 +6,24 @@ import Validator from "../utils/validator";
 
 const signIn = async (req: any, res: any, next?: Function) => {
   try {
-    const email: string = req.body.email;
+    const phone: string = req.body.phone;
     const password: string = req.body.password;
 
-    // Checks if email and password is present
-    if (!email || !password) {
-      // If email and password not present then return a 400 response
+    // Checks if phone and password is present
+    if (!phone || !password) {
+      // If phone and password not present then return a 400 response
       return res.status(400).json({
         error_code: Err.code.EMPTY_PARAM,
         message: Err.message.EMPTY_PARAM,
       });
     }
 
-    // Checks if email is valid
-    if (!Validator.validateEmail(email)) {
-      // If email is not valid return a 400 response
+    // Checks if phone is valid
+    if (!Validator.validatePhone(phone)) {
+      // If phone is not valid return a 400 response
       return res.status(400).json({
-        error_code: Err.code.INVALID_EMAIL,
-        message: Err.message.INVALID_EMAIL,
+        error_code: Err.code.INVALID_PHONE,
+        message: Err.message.INVALID_PHONE,
       });
     }
 
@@ -36,14 +36,14 @@ const signIn = async (req: any, res: any, next?: Function) => {
       });
     }
 
-    // Checking if a user with this email is present in the DB
-    const user = await User.findOne({ email: email });
+    // Checking if a user with this phone is present in the DB
+    const user = await User.findOne({ phone: phone });
 
     // If user not present return a 400 response
     if (!user) {
       return res.status(400).json({
-        error_code: Err.code.NO_USER_WITH_EMAIL,
-        message: Err.message.NO_USER_WITH_EMAIL,
+        error_code: Err.code.NO_USER_WITH_PHONE,
+        message: Err.message.NO_USER_WITH_PHONE,
       });
     }
 
@@ -65,7 +65,7 @@ const signIn = async (req: any, res: any, next?: Function) => {
     // Creating a token. Store this token and provide this token
     // when ever you want to get data for which authentication is required
     const token: string = jwt.sign(
-      { id: id, email: email },
+      { id: id, phone: phone },
       process.env.TOKEN_KEY!,
       {
         expiresIn: "1d",
@@ -78,7 +78,7 @@ const signIn = async (req: any, res: any, next?: Function) => {
       user: {
         id: id,
         name: name,
-        email: email,
+        phone: phone,
         token: token,
       },
     });
