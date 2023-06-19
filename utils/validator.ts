@@ -63,13 +63,7 @@ class Validator {
       return false;
     }
 
-    try {
-      parseInt(phone);
-
-      return true;
-    } catch (error) {
-      return false;
-    }
+    return !isNaN(Number(phone));
   }
 
   /// Validates is password length is between 8 and 1000
