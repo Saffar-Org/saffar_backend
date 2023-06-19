@@ -47,7 +47,7 @@ const signIn = async (req: any, res: any, next?: Function) => {
       });
     }
 
-    const id: string = user.id as string;
+    const id: string = user._id.toString() as string;
     const name: string = user.name as string;
     const encryptedPassword: string = user.password;
 

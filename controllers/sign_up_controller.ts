@@ -1,6 +1,5 @@
 import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
-import * as uuid from "uuid";
 import Constant from "../constants/constant";
 import Err from "../constants/error";
 import User from "../models/User";
@@ -9,7 +8,6 @@ import Validator from "../utils/validator";
 const signUp = async (req: any, res: any, next?: Function) => {
   try {
     // Generating a random id
-    const id: string = uuid.v4();
     const name: string = req.body.name;
     const phone: string = req.body.phone;
     const password: string = req.body.password;
@@ -64,13 +62,14 @@ const signUp = async (req: any, res: any, next?: Function) => {
     const hashedPassword = await bcrypt.hash(password, Constant.saltRounds);
 
     // Creating a user in MongoDB
-    await User.create({
-      _id: id,
-      id: id,
+    const user = await User.create({
       name: name,
       phone: phone,
       password: hashedPassword,
     });
+
+    // MongoDB object _id
+    const id: string = user._id.toString();
 
     // Creating a token. Store this token and provide this token
     // when ever you want to get data for which authentication is required

@@ -2,20 +2,6 @@ import * as mongoose from "mongoose";
 import Validator from "../utils/validator";
 
 const driverSchema = new mongoose.Schema({
-  _id: {
-    type: String,
-    required: true,
-    unique: true,
-    minLength: 1,
-    maxLength: 1000,
-  },
-  id: {
-    type: String,
-    required: true,
-    unique: true,
-    minLength: 1,
-    maxLength: 1000,
-  },
   name: {
     type: String,
     required: true,
