@@ -22,6 +22,8 @@ const driverSchema = new mongoose.Schema({
   email: {
     type: String,
     unique: true,
+    sparse: true,
+    index: true,
     minLength: 5,
     maxLength: 254,
     validate: {
