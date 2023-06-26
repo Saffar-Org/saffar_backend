@@ -13,8 +13,10 @@ const driverSignIn = async (req: any, res: any, next?: Function) => {
     if (phone === undefined || password === undefined) {
       // If phone and password not present then return a 400 response
       return res.status(400).json({
-        error_code: Err.code.EMPTY_PARAM,
-        message: Err.message.EMPTY_PARAM,
+        error: {
+          code: Err.code.EMPTY_PARAM,
+          message: Err.message.EMPTY_PARAM,
+        },
       });
     }
 
@@ -22,8 +24,10 @@ const driverSignIn = async (req: any, res: any, next?: Function) => {
     if (!Validator.validatePhone(phone)) {
       // If phone is not valid return a 400 response
       return res.status(400).json({
-        error_code: Err.code.INVALID_PHONE,
-        message: Err.message.INVALID_PHONE,
+        error: {
+          code: Err.code.INVALID_PHONE,
+          message: Err.message.INVALID_PHONE,
+        },
       });
     }
 
@@ -31,8 +35,10 @@ const driverSignIn = async (req: any, res: any, next?: Function) => {
     if (!Validator.validatePassword(password)) {
       // If password is not valid return a 400 response
       return res.status(400).json({
-        error_code: Err.code.INVALID_PASSWORD,
-        message: Err.message.INVALID_PASSWORD,
+        error: {
+          code: Err.code.INVALID_PASSWORD,
+          message: Err.message.INVALID_PASSWORD,
+        },
       });
     }
 
@@ -42,8 +48,10 @@ const driverSignIn = async (req: any, res: any, next?: Function) => {
     // If driver not present return a 400 response
     if (!driver) {
       return res.status(400).json({
-        error_code: Err.code.NO_DRIVER_WITH_PHONE,
-        message: Err.message.NO_DRIVER_WITH_PHONE,
+        error: {
+          code: Err.code.NO_DRIVER_WITH_PHONE,
+          message: Err.message.NO_DRIVER_WITH_PHONE,
+        },
       });
     }
 
@@ -54,13 +62,18 @@ const driverSignIn = async (req: any, res: any, next?: Function) => {
     const vehicleNumber: string = driver.vehicle_number;
 
     // Compare password with encrypted password
-    const passwordCorrect: boolean = await bcrypt.compare(password, encryptedPassword);
+    const passwordCorrect: boolean = await bcrypt.compare(
+      password,
+      encryptedPassword
+    );
 
     // If password not correct then return 400 response
     if (!passwordCorrect) {
       return res.status(400).json({
-        error_code: Err.code.WRONG_PASSWORD,
-        message: Err.message.WRONG_PASSWORD,
+        error: {
+          code: Err.code.WRONG_PASSWORD,
+          message: Err.message.WRONG_PASSWORD,
+        },
       });
     }
 
@@ -90,8 +103,10 @@ const driverSignIn = async (req: any, res: any, next?: Function) => {
     console.log(`Error in sign in: ${error}`);
 
     res.status(500).json({
-      error_code: Err.code.SERVER_ERROR,
-      message: Err.message.SERVER_ERROR,
+      error: {
+        code: Err.code.SERVER_ERROR,
+        message: Err.message.SERVER_ERROR,
+      },
     });
   }
 };

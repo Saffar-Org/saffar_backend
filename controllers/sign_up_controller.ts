@@ -17,32 +17,40 @@ const signUp = async (req: any, res: any, next?: Function) => {
     // is returned.
     if (name === undefined || phone === undefined || password === undefined) {
       return res.status(400).json({
-        error_code: Err.code.EMPTY_PARAM,
-        message: Err.message.EMPTY_PARAM,
+        error: {
+          code: Err.code.EMPTY_PARAM,
+          message: Err.message.EMPTY_PARAM,
+        },
       });
     }
 
     // Checking if name is valid
     if (!Validator.validateName(name)) {
       return res.status(400).json({
-        error_code: Err.code.INVALID_NAME,
-        message: Err.message.INVALID_NAME,
+        error: {
+          code: Err.code.INVALID_NAME,
+          message: Err.message.INVALID_NAME,
+        },
       });
     }
 
     // Checking if phone is valid
     if (!Validator.validatePhone(phone)) {
       return res.status(400).json({
-        error_code: Err.code.INVALID_PHONE,
-        message: Err.message.INVALID_PHONE,
+        error: {
+          code: Err.code.INVALID_PHONE,
+          message: Err.message.INVALID_PHONE,
+        },
       });
     }
 
     // Checking if password is valid
     if (!Validator.validatePassword(password)) {
       return res.status(400).json({
-        error_code: Err.code.INVALID_PASSWORD,
-        message: Err.message.INVALID_PASSWORD,
+        error: {
+          code: Err.code.INVALID_PASSWORD,
+          message: Err.message.INVALID_PASSWORD,
+        },
       });
     }
 
@@ -53,8 +61,10 @@ const signUp = async (req: any, res: any, next?: Function) => {
     // already present
     if (oldUser) {
       return res.status(409).json({
-        error_code: Err.code.PHONE_ALREADY_EXISTS,
-        message: Err.message.PHONE_ALREADY_EXISTS,
+        error: {
+          code: Err.code.PHONE_ALREADY_EXISTS,
+          message: Err.message.PHONE_ALREADY_EXISTS,
+        },
       });
     }
 
@@ -100,8 +110,10 @@ const signUp = async (req: any, res: any, next?: Function) => {
 
     // Returning server error
     res.status(500).json({
-      error_code: Err.code.SERVER_ERROR,
-      message: Err.message.SERVER_ERROR,
+      error: {
+        code: Err.code.SERVER_ERROR,
+        message: Err.message.SERVER_ERROR,
+      },
     });
   }
 };
