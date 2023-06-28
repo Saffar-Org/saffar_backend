@@ -68,15 +68,6 @@ const driverSchema = new mongoose.Schema({
   longitude: {
     type: Number,
   },
-  reviews: {
-    type: [
-      {
-        type: mongoose.SchemaTypes.ObjectId,
-        ref: "Review",
-      },
-    ],
-    default: [],
-  },
   rides: {
     type: [
       {

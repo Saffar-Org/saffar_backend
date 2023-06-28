@@ -16,6 +16,10 @@ class Err {
     NO_DRIVER_WITH_PHONE: "NO_DRIVER_WITH_PHONE",
     NO_DRIVER_WITH_EMAIL: "NO_DRIVER_WITH_EMAIL",
     WRONG_PASSWORD: "WRONG_PASSWORD",
+    AUTHORIZATION_HEADER_MISSING: "AUTHORIZATION_HEADER_MISSING",
+    INCORRECT_BEARER_TOKEN_FORMAT: "INCORRECT_BEARER_TOKEN_FORMAT",
+    INVALID_BEARER_TOKEN: "INVALID_BEARER_TOKEN",
+    NO_USER_WITH_ID: "NO_USER_WITH_ID",
   };
 
   static message = {
@@ -36,6 +40,10 @@ class Err {
     NO_DRIVER_WITH_PHONE: "There is no driver with this phone.",
     NO_DRIVER_WITH_EMAIL: "There is no driver with this email.",
     WRONG_PASSWORD: "Password is wrong.",
+    AUTHORIZATION_HEADER_MISSING: "There is no authorization header in the request",
+    INCORRECT_BEARER_TOKEN_FORMAT: 'Bearer token format is incorrect. It shoule be like "Bearer <token>"',
+    INVALID_BEARER_TOKEN: "Bearer token is either not active, expired or invalid",
+    NO_USER_WITH_ID: "There is no user present with user id",
   };
 }
 

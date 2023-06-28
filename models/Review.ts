@@ -13,13 +13,15 @@ const reviewSchema = new mongoose.Schema({
         minLength: 0,
         maxLength: 5,
     },
-    by: {
+    user: {
         type: mongoose.SchemaTypes.ObjectId,
         required: true,
+        ref: "User",
     },
-    for: {
+    driver: {
         type: mongoose.SchemaTypes.ObjectId,
         required: true,
+        ref: "Driver",
     },
     createdAt: {
         type: Date,

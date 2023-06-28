@@ -4,18 +4,22 @@ const rideSchema = new mongoose.Schema({
     user: {
         type: mongoose.SchemaTypes.ObjectId,
         required: true,
+        ref: "User",
     },
     driver: {
         type: mongoose.SchemaTypes.ObjectId,
         required: true,
+        ref: "Driver",
     },
     source_address: {
         type: mongoose.SchemaTypes.ObjectId,
         required: true,
+        ref: "Address",
     },
     destination_address: {
         type: mongoose.SchemaTypes.ObjectId,
         required: true,
+        ref: "Address",
     },
     start_time: {
         type: Date,
@@ -36,6 +40,7 @@ const rideSchema = new mongoose.Schema({
     },
 });
 
-const ride = mongoose.model("Ride", rideSchema, "Rides");
+const ride = mongoose.model("Ride", rideSchema, "rides");
 
 export = ride;
+ 

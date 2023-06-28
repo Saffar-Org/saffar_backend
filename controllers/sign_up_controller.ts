@@ -85,9 +85,9 @@ const signUp = async (req: any, res: any, next?: Function) => {
     // when ever you want to get data for which authentication is required
     const token: string = jwt.sign(
       { id: id, phone: phone },
-      process.env.TOKEN_KEY!,
+      process.env.TOKEN_SECRET_KEY!,
       {
-        expiresIn: "1d",
+        expiresIn: process.env.TOKEN_EXPIRY_TIME,
       }
     );
 
