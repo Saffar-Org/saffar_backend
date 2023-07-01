@@ -34,7 +34,7 @@ app.use("/api/driver_sign_up", driverSignUpRouter);
 app.use("/api/sign_in", signInRouter);
 app.use("/api/driver_sign_in", driverSignInRouter);
 
-// Address API Routes
+// Previous rides API Routes
 app.use("/api/previous_rides", rideRouter);
 
 // Listening to PORT
