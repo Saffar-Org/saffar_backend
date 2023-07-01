@@ -62,21 +62,6 @@ const driverSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  latitude: {
-    type: Number,
-  },
-  longitude: {
-    type: Number,
-  },
-  rides: {
-    type: [
-      {
-        type: mongoose.SchemaTypes.ObjectId,
-        ref: "Ride",
-      },
-    ],
-    default: [],
-  },
 });
 
 const driver = mongoose.model("Driver", driverSchema, "drivers");

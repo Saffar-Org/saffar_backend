@@ -57,6 +57,9 @@ const driverSignIn = async (req: any, res: any, next?: Function) => {
 
     const id: string = driver._id.toString() as string;
     const name: string = driver.name as string;
+    const email: string | undefined = driver.email;
+    const imageUrl: string | undefined = driver.image_url;
+    const active: boolean = driver.active;
     const encryptedPassword: string = driver.password;
     const vehicleName: string = driver.vehicle_name;
     const vehicleNumber: string = driver.vehicle_number;
@@ -94,6 +97,9 @@ const driverSignIn = async (req: any, res: any, next?: Function) => {
         id: id,
         name: name,
         phone: phone,
+        email: email,
+        image_url: imageUrl,
+        active: active,
         vehicle_name: vehicleName,
         vehicle_number: vehicleNumber,
         token: token,
