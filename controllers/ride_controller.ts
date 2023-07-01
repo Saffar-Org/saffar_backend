@@ -1,6 +1,5 @@
 import Err from "../constants/error";
 import Ride from "../models/Ride";
-import User from "../models/User";
 import Address from "../models/Address";
 import Validator from "../utils/validator";
 import tokenMiddleware from "../middlewares/token_middleware";
@@ -51,6 +50,8 @@ const getAllPreviousRidesOfUser = async (
       });
     }
 
+    Address.findOne();
+
     const currentDateTime: Date = new Date();
 
     // Finding a list of Rides ridden by the user
@@ -66,7 +67,7 @@ const getAllPreviousRidesOfUser = async (
     // destination address to the user.
     res.status(200).json({
       message: "All previous rides of the user fetched successfully.",
-      addresses: allPreviousRidesByUser,
+      previous_rides: allPreviousRidesByUser,
     });
   } catch (error) {
     console.log(`Error in getAllPreviousRidesOfUser: ${error}`);
