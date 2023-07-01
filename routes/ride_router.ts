@@ -3,7 +3,7 @@ import getAllPreviousRidesOfUser from "../controllers/ride_controller";
 
 const router = express.Router();
 
-router.get("/", (req: any, res: any) => {
+router.get("/previous_rides", (req: any, res: any) => {
     getAllPreviousRidesOfUser(req, res);
 });
 
