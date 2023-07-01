@@ -46,30 +46,6 @@ const userSchema = new mongoose.Schema({
     minLength: 1,
     maxLength: 1000,
   },
-  latitude: {
-    type: Number,
-  },
-  longitude: {
-    type: Number,
-  },
-  reviews: {
-    type: [
-      {
-        type: mongoose.SchemaTypes.ObjectId,
-        ref: "Review",
-      },
-    ],
-    default: [],
-  },
-  rides: {
-    type: [
-      {
-        type: mongoose.SchemaTypes.ObjectId,
-        ref: "Ride",
-      },
-    ],
-    default: [],
-  },
 });
 
 const user = mongoose.model("User", userSchema, "users");

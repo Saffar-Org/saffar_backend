@@ -58,6 +58,8 @@ const signIn = async (req: any, res: any, next?: Function) => {
     const id: string = user._id.toString() as string;
     const name: string = user.name as string;
     const encryptedPassword: string = user.password;
+    const email: string | undefined = user.email;
+    const imageUrl: string | undefined = user.image_url;
 
     // Compare password with encrypted password
     const passwordCorrect: boolean = await bcrypt.compare(
@@ -93,6 +95,8 @@ const signIn = async (req: any, res: any, next?: Function) => {
         name: name,
         phone: phone,
         token: token,
+        email: email,
+        image_url: imageUrl,
       },
     });
   } catch (error) {
