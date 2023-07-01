@@ -1,10 +1,10 @@
 import * as express from "express";
-import getAllAddressOfUserWithId from "../controllers/address_controller";
+import getAllPreviousRidesOfUser from "../controllers/ride_controller";
 
 const router = express.Router();
 
 router.get("/", (req: any, res: any) => {
-    getAllAddressOfUserWithId(req, res);
+    getAllPreviousRidesOfUser(req, res);
 });
 
 export = router;
