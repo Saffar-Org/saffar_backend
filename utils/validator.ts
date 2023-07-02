@@ -1,24 +1,7 @@
-import * as jwt from "jsonwebtoken";
-
 class Validator {
   // Email Regular Expressing
   private static emailRegex: RegExp =
     /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
-
-  /// Checks if token is valid and returns true/false
-  static validateToken = (token: string): boolean => {
-    let validToken: boolean = false;
-
-    jwt.verify(token, process.env.TOKEN_SECRET_KEY!, (error) => {
-      if (error) {
-        console.log(`Error in TOKEN: ${error}`);
-      } else {
-        validToken = true;
-      }
-    });
-
-    return validToken;
-  };
 
   /// Checks if name length is between 1 and 1000
   static validateName(name: string) {
