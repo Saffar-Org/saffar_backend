@@ -24,6 +24,7 @@ const addRide = async (req: any, res: any, next?: Function) => {
       driverId === undefined ||
       sourceAddressId === undefined ||
       destinationAddressId === undefined ||
+      startTimeString === undefined ||
       price === undefined
     ) {
       return res.status(400).json({
