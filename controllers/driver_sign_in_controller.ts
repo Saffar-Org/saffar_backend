@@ -102,8 +102,8 @@ const driverSignIn = async (req: any, res: any, next?: Function) => {
         active: active,
         vehicle_name: vehicleName,
         vehicle_number: vehicleNumber,
-        token: token,
       },
+      token: token,
     });
   } catch (error) {
     console.log(`Error in sign in: ${error}`);

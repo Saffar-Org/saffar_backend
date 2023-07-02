@@ -98,8 +98,8 @@ const signUp = async (req: any, res: any, next?: Function) => {
         id: id,
         name: name,
         phone: phone,
-        token: token,
       },
+      token: token,
     });
 
     if (next != undefined) {

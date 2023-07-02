@@ -94,10 +94,10 @@ const signIn = async (req: any, res: any, next?: Function) => {
         id: id,
         name: name,
         phone: phone,
-        token: token,
         email: email,
         image_url: imageUrl,
       },
+      token: token,
     });
   } catch (error) {
     console.log(`Error in sign in: ${error}`);
