@@ -16,6 +16,14 @@ const addressSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    lat: {
+        type: Number,
+        required: true,
+    },
+    lon: {
+        type: Number,
+        required: true,
+    },
     pincode: {
         type: String,
     },
