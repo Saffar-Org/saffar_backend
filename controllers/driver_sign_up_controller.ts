@@ -5,7 +5,7 @@ import Err from "../constants/error";
 import Driver from "../models/Driver";
 import Validator from "../utils/validator";
 
-const driverSignUp = async (req: any, res: any, next?: Function) => {
+const driverSignUp = async (req: any, res: any) => {
   try {
     // Generating a random id
     const name: string = req.body.name;
@@ -132,10 +132,6 @@ const driverSignUp = async (req: any, res: any, next?: Function) => {
       },
       token: token,
     });
-
-    if (next != undefined) {
-      next();
-    }
   } catch (error) {
     console.log(`Error in sign up: ${error}`);
 

@@ -4,7 +4,7 @@ import Err from "../constants/error";
 import User from "../models/User";
 import Validator from "../utils/validator";
 
-const signIn = async (req: any, res: any, next?: Function) => {
+const signIn = async (req: any, res: any) => {
   try {
     const phone: string = req.body.phone;
     const password: string = req.body.password;

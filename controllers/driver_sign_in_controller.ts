@@ -4,7 +4,7 @@ import Err from "../constants/error";
 import Driver from "../models/Driver";
 import Validator from "../utils/validator";
 
-const driverSignIn = async (req: any, res: any, next?: Function) => {
+const driverSignIn = async (req: any, res: any) => {
   try {
     const phone: string = req.body.phone;
     const password: string = req.body.password;

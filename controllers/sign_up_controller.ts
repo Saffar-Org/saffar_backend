@@ -5,7 +5,7 @@ import Err from "../constants/error";
 import User from "../models/User";
 import Validator from "../utils/validator";
 
-const signUp = async (req: any, res: any, next?: Function) => {
+const signUp = async (req: any, res: any) => {
   try {
     // Generating a random id
     const name: string = req.body.name;
@@ -101,10 +101,6 @@ const signUp = async (req: any, res: any, next?: Function) => {
       },
       token: token,
     });
-
-    if (next != undefined) {
-      next();
-    }
   } catch (error) {
     console.log(`Error in sign up: ${error}`);
 

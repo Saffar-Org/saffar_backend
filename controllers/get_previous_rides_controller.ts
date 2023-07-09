@@ -11,7 +11,7 @@ import Helper from "../utils/helper";
 /// If token is not valid, user id is not present, user
 /// is not present then returns a 400 response. Else
 /// returns a list of all the previous rides of the user.
-const getPreviousRidesOfUser = async (req: any, res: any, next?: Function) => {
+const getPreviousRidesOfUser = async (req: any, res: any) => {
   try {
     // Validates Bearer token
     TokenMiddleware.validateBearerToken(req, res);
