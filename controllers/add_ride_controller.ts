@@ -1,13 +1,9 @@
 import Err from "../constants/error";
-import tokenMiddleware from "../middlewares/token_middleware";
 import Ride from "../models/Ride";
 
 /// Creates a Ride document in MongoDB
 const addRide = async (req: any, res: any) => {
   try {
-    // Validates Bearer token
-    tokenMiddleware.validateBearerToken(req, res);
-
     const userId: string = req.body.user_id;
     const driverId: string = req.body.driver_id;
     const sourceAddressId: string = req.body.source_address_id;
