@@ -3,7 +3,7 @@ import Ride from "../models/Ride";
 import User from "../models/User";
 import Driver from "../models/Driver";
 import Address from "../models/Address";
-import TokenMiddleware from "../middlewares/token_middleware";
+import tokenMiddleware from "../middlewares/token_middleware";
 import Helper from "../utils/helper";
 
 /// Validates Bearer token then sends a response 
@@ -14,7 +14,7 @@ import Helper from "../utils/helper";
 const getPreviousRidesOfUser = async (req: any, res: any) => {
   try {
     // Validates Bearer token
-    TokenMiddleware.validateBearerToken(req, res);
+    tokenMiddleware.validateBearerToken(req, res);
 
     const userId = req.body.user_id;
 
