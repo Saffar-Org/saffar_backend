@@ -20,6 +20,7 @@ class Err {
     INCORRECT_BEARER_TOKEN_FORMAT: "INCORRECT_BEARER_TOKEN_FORMAT",
     INVALID_BEARER_TOKEN: "INVALID_BEARER_TOKEN",
     NO_USER_WITH_ID: "NO_USER_WITH_ID",
+    NO_PRICE_IN_DB: "NO_PRICE_IN_DB",
   };
 
   static message = {
@@ -44,6 +45,7 @@ class Err {
     INCORRECT_BEARER_TOKEN_FORMAT: 'Bearer token format is incorrect. It shoule be like "Bearer <token>"',
     INVALID_BEARER_TOKEN: "Bearer token is either not active, expired or invalid",
     NO_USER_WITH_ID: "There is no user present with user id",
+    NO_PRICE_IN_DB: "There is no price info in database.",
   };
 }
 
