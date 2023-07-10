@@ -3,7 +3,7 @@ import Err from "../constants/error";
 
 /// Gets price info from DB then calculates total ride price
 const getPriceInfoAndCalculateRidePrice = async (req: any, res: any) => {
-    const rideDistanceInKm = req.body.distance;
+    const rideDistanceInKm = req.body.distance_in_km;
 
     // If ride's distance is not given by user then 
     // return 400 response
