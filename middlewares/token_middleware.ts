@@ -51,6 +51,10 @@ const validateBearerToken = (req: any, res: any, next?: Function): void => {
       throw `Token error: ${Err.message.INVALID_BEARER_TOKEN}`;
     }
   });
+
+  if (next) {
+    next();
+  }
 };
 
 const tokenMiddleware = { validateBearerToken };
