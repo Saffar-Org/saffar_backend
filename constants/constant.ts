@@ -1,6 +1,41 @@
 class Constant {
-    /// Salt Rounds for encrpyting and dcrypting password
-    static saltRounds: number = 10;
+  /// Salt Rounds for encrpyting and dcrypting password
+  static saltRounds: number = 10;
+
+  // 31 drivers phone numbers
+  static phoneNumbers: string[] = [
+    "098765419X",
+    "987654220X",
+    "876543121X",
+    "765432022X",
+    "654321923X",
+    "543210824X",
+    "432109725X",
+    "321098626X",
+    "210987527X",
+    "109876428X",
+    "098765329X",
+    "987654130X",
+    "876543031X",
+    "765432932X",
+    "654321833X",
+    "543210734X",
+    "432109635X",
+    "321098536X",
+    "210987437X",
+    "109876338X",
+    "098765239X",
+    "987654040X",
+    "876542941X",
+    "765432842X",
+    "654321743X",
+    "543210644X",
+    "432109545X",
+    "321098446X",
+    "210987347X",
+    "109876248X",
+    "098765149X",
+  ];
 }
 
 export = Constant;

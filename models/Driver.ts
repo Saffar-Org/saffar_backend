@@ -14,10 +14,6 @@ const driverSchema = new mongoose.Schema({
     unique: true,
     minLength: 10,
     maxLength: 10,
-    validate: {
-      validator: (phone: string) => Validator.validatePhone(phone),
-      message: (props: any) => `${props.value} is not a valid phone.`,
-    },
   },
   email: {
     type: String,
