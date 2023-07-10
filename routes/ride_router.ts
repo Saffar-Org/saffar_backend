@@ -8,13 +8,9 @@ const router = express.Router();
 router.get(
   "/previous_rides",
   tokenMiddleware.validateBearerToken,
-  (req: any, res: any) => {
-    getPreviousRidesOfUser(req, res);
-  }
+  getPreviousRidesOfUser
 );
 
-router.post("/add_ride", (req: any, res: any) => {
-  addRide(req, res);
-});
+router.post("/add_ride", addRide);
 
 export = router;

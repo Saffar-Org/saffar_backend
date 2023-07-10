@@ -6,20 +6,12 @@ import driverSignIn from "../controllers/driver_sign_in_controller";
 
 const router = express.Router();
 
-router.post("/sign_up", (req: any, res: any) => {
-  signUp(req, res);
-});
+router.post("/sign_up", signUp);
 
-router.post("/driver_sign_up", (req: any, res: any) => {
-  driverSignUp(req, res);
-});
+router.post("/driver_sign_up", driverSignUp);
 
-router.post("/sign_in", (req: any, res: any) => {
-  signIn(req, res);
-});
+router.post("/sign_in", signIn);
 
-router.post("/driver_sign_in", (req: any, res: any) => {
-  driverSignIn(req, res);
-});
+router.post("/driver_sign_in", driverSignIn);
 
 export = router;
