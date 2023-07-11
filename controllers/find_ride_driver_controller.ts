@@ -41,8 +41,8 @@ const findRideDriver = async (req: any, res: any) => {
     const response: AxiosResponse = await axios.get(
       `https://api.tomtom.com/routing/1/calculateRoute/${pointLatitude},${pointLongitude}:${latitude},${longitude}/json?key=${mapApiKey}`
     );
-
-    // Driver lat lon
+    
+    // Route points
     const points = response.data["routes"][0]["legs"][0]["points"];
     const driverSourceLatLon = points[0];
     const driverDestinationLatLon = points[points.length - 1];
