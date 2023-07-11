@@ -6,7 +6,7 @@ import Helper from "../utils/helper";
 import Constant from "../constants/constant";
 
 /// Finds a driver near the users location who is active.
-/// If no driver is available then a new driver is created 
+/// If no driver is available then a new driver is created
 /// and then the drive info is sent to the user.
 const findRideDriver = async (req: any, res: any) => {
   try {
@@ -41,7 +41,7 @@ const findRideDriver = async (req: any, res: any) => {
     const response: AxiosResponse = await axios.get(
       `https://api.tomtom.com/routing/1/calculateRoute/${pointLatitude},${pointLongitude}:${latitude},${longitude}/json?key=${mapApiKey}`
     );
-    
+
     // Route points
     const points = response.data["routes"][0]["legs"][0]["points"];
     const driverSourceLatLon = points[0];
@@ -87,8 +87,13 @@ const findRideDriver = async (req: any, res: any) => {
       });
     }
 
+    // Getting a driver field without the _id and __v fields
+    const driverWithIdField = Helper.getObjectWithIdInsteadOf_idAnd__v(driver);
+
+    // Responding with a driver object and the source and destination 
+    // position of the driver
     res.json({
-      driver,
+      driver: driverWithIdField,
       source_position: {
         latitude: driverSourceLatitude,
         longitude: driverSourceLongitude,
