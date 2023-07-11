@@ -108,6 +108,7 @@ const driverSignIn = async (req: any, res: any) => {
   } catch (error) {
     console.log(`Error in sign in: ${error}`);
 
+    // Server error
     res.status(500).json({
       error: {
         code: Err.code.SERVER_ERROR,
