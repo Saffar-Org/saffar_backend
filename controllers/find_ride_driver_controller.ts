@@ -51,11 +51,11 @@ const findRideDriver = async (req: any, res: any) => {
       driverSourceLatLon["latitude"]
     );
     const driverSourceLongitude: number = Number.parseFloat(
-      driverDestinationLatLon["longitude"]
+      driverSourceLatLon["longitude"]
     );
 
     const driverDestinationLatitude: number = Number.parseFloat(
-      driverSourceLatLon["latitude"]
+      driverDestinationLatLon["latitude"]
     );
     const driverDestinationLongitude: number = Number.parseFloat(
       driverDestinationLatLon["longitude"]
