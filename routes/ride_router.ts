@@ -1,6 +1,6 @@
 import * as express from "express";
 import getPreviousRidesOfUser from "../controllers/get_previous_rides_controller";
-import addRide from "../controllers/add_ride_controller";
+import addRideAndRideAddresses from "../controllers/add_ride_controller";
 import tokenMiddleware from "../middlewares/token_middleware";
 import getPriceInfoAndCalculateRidePrice from "../controllers/calculate_ride_price_controller";
 import findRideDriver from "../controllers/find_ride_driver_controller";
@@ -13,7 +13,7 @@ router.get(
   getPreviousRidesOfUser
 );
 
-router.post("/add_ride", tokenMiddleware.validateBearerToken, addRide);
+router.post("/add_ride", tokenMiddleware.validateBearerToken, addRideAndRideAddresses);
 
 router.get(
   "/total_price",

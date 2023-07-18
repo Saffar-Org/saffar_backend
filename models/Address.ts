@@ -10,11 +10,9 @@ const addressSchema = new mongoose.Schema({
     },
     state: {
         type: String,
-        required: true,
     },
     country: {
         type: String,
-        required: true,
     },
     lat: {
         type: Number,

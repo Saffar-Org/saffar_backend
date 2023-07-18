@@ -1,13 +1,15 @@
 import Err from "../constants/error";
 import Ride from "../models/Ride";
+import Address from "../models/Address";
 
-/// Creates a Ride document in MongoDB
-const addRide = async (req: any, res: any) => {
+/// Creates a Ride document and the source and destination document
+/// in MongoDB
+const addRideAndRideAddresses = async (req: any, res: any) => {
   try {
     const userId: string = req.body.user_id;
     const driverId: string = req.body.driver_id;
-    const sourceAddressId: string = req.body.source_address_id;
-    const destinationAddressId: string = req.body.destination_address_id;
+    const sourceAddress: any = req.body.source_address;
+    const destinationAddress: any = req.body.destination_address;
     const startTimeString: string = req.body.start_time;
     const endTimeString: string = req.body.end_time;
     const cancelled: boolean = req.body.cancelled ?? false;
@@ -18,8 +20,8 @@ const addRide = async (req: any, res: any) => {
     if (
       userId === undefined ||
       driverId === undefined ||
-      sourceAddressId === undefined ||
-      destinationAddressId === undefined ||
+      sourceAddress === undefined ||
+      destinationAddress === undefined ||
       startTimeString === undefined ||
       price === undefined
     ) {
@@ -34,6 +36,31 @@ const addRide = async (req: any, res: any) => {
     // Date and Time from string
     const startTime = new Date(startTimeString);
     const endTime = new Date(endTimeString);
+
+    // Creating the source address in MongoDB
+    const sourceAddressDoc = await Address.create({
+      place: sourceAddress["place"],
+      street: sourceAddress["street"],
+      state: sourceAddress["state"],
+      country: sourceAddress["country"],
+      lat: sourceAddress["lat"],
+      lon: sourceAddress["lon"],
+      pincode: sourceAddress["pincode"],
+    });
+
+    // Creating the destination address in MongoDB
+    const destinationAddressDoc = await Address.create({
+      place: destinationAddress["place"],
+      street: destinationAddress["street"],
+      state: destinationAddress["state"],
+      country: destinationAddress["country"],
+      lat: destinationAddress["lat"],
+      lon: destinationAddress["lon"],
+      pincode: destinationAddress["pincode"],
+    });
+
+    const sourceAddressId: string = sourceAddressDoc._id.toString();
+    const destinationAddressId: string = destinationAddressDoc._id.toString();
 
     // Creating a ride in MongoDB
     await Ride.create({
@@ -53,9 +80,9 @@ const addRide = async (req: any, res: any) => {
       message: "Ride created successfully.",
     });
   } catch (error) {
-    console.log(`Error in addRide: ${error}`);
+    console.log(`Error in addRideAndRideAddresses: ${error}`);
 
-    // Server error 
+    // Server error
     res.status(500).json({
       error: {
         code: Err.code.SERVER_ERROR,
@@ -65,4 +92,4 @@ const addRide = async (req: any, res: any) => {
   }
 };
 
-export = addRide;
+export = addRideAndRideAddresses;
