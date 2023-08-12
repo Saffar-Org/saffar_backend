@@ -5,8 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx nodemon",
-    "dev": "npx nodemon"
+    "start": "node build/app.js",
+    "dev": "nodemon build/app.js",
+    "devTS": "nodemon app.ts"
   },
   "author": "Dhritiman Roy",
   "license": "ISC",
